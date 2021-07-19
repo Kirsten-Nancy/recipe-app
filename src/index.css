@@ -1,0 +1,249 @@
+:root {
+  --primary-color: #29BB89;
+  --white: #fff;
+  --main-bg-color: #f1f5f8;
+  --black: #000;
+  --red: #EF4F4F;
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+body {
+  background-color: #F1F8F6;
+}
+
+/* NAV SECTION */
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 10vh;
+  border-bottom: 1px solid var(--primary-color);
+
+}
+
+.nav-links {
+  width: 50%;
+  display: flex;
+  justify-content: space-evenly;
+  list-style: none;
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: Arial, Helvetica, sans-serif; */
+}
+.nav-links li {
+  font-family: 'Helvetica Neue';
+  /* font-weight: bold; */
+}
+a {
+  text-decoration: none;
+  color: var(--black);
+}
+.logo {
+  color: var(--primary-color);
+}
+p {
+  line-height: 2rem;
+}
+
+/* REGISTER-FORM  SECTION */
+.register-form {
+  width: 40%;
+  margin: 1rem auto;
+  padding: 1rem;
+  /* background-color: #EF4F4F; */
+}
+input[type=email], input[type=password] {
+  margin-top: 1rem;
+  padding: 0.8rem;
+}
+.auth-btn {
+  margin-top: 1rem;
+  padding: 0.8rem;
+}
+
+/* RECIPE-FORM SECTION */
+.form-container {
+  width: 100%;
+  margin: 0 auto;
+  background-color: var(--white);
+  padding: 2rem 3rem;
+  margin-top: 1rem;
+}
+form {
+  display: flex;
+  flex-direction: column;
+}
+input[type=text] {
+  margin: 1rem 0;
+  width: 100%;
+  padding: 0.8rem;
+}
+textarea{
+  margin: 1rem 0;
+  width: 100%;
+  padding: 1rem;
+}
+.ingredient-field, .instruction-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+input[type=submit], input[type=button] {
+  border: none;
+  /* border-radius: 12px; */
+  background-color: var(--primary-color);
+  color: var(--white);
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+select {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: var(--white);
+  border: 1px solid grey;
+}
+.add-btn {
+  padding: 1rem 2rem;
+  margin: 0 auto;
+  display: block;
+}
+
+.delete-icon {
+  color: var(--red);
+  font-size: 1.7rem;
+  margin-left: 1.5rem;
+}
+.create-btn {
+  margin: 2rem 0;
+  width: 100%;
+  padding: 0.8rem;
+ 
+}
+
+/* MAIN BODY */
+.main-container {
+  padding: 1% 6%;
+  display: grid;
+  gap: 1.5rem;
+
+}
+
+.main-container img {
+  width: 100%;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/* RECIPE SECTION */
+.card {
+  border-radius: 12px;
+  padding: 1rem 2rem;
+  /* background-color: #004643; */
+}
+.card h5{
+  margin: 0.8rem 0;
+  color: #004643;
+  text-transform: capitalize;
+}
+
+/* RECIPE DETAIL */
+.food-detail-container {
+  padding: 1% 8%;
+}
+.food-detail-container li {
+  margin-top: 1rem;
+  text-transform: capitalize;
+}
+h1 {
+  text-align: center;
+}
+.recipe-parameters {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 2rem 0;
+
+}
+
+.recipe-intro {
+  margin-top: 1rem;
+}
+
+.recipe-img {
+  width: 100%;
+  margin: 2rem 0;
+}
+ .recipe-img img {
+  width: 100%;                   
+  object-fit: cover;
+  height: 300px;
+  border-radius: 12px;
+}
+
+.food-detail-container span {
+  display: block;
+  margin-top: 1rem;
+}
+.recipe-content {
+  width: 100%;
+}
+.recipe-ingredients {
+  width: 100%;
+}
+.recipe-ingredients ul ,ol{
+  padding-left: 1rem;
+}
+.recipe-prep {
+  width: 100%;
+}
+.recipe-ingredients,
+.recipe-prep {
+  padding: 1rem 0;
+}
+
+
+
+@media (min-width: 992px) { 
+  .main-container {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 1% 15%;
+  }
+  
+  .form-container {
+    width: 40%; 
+  }
+  .food-detail-container {
+    padding: 1% 15%;
+  }
+  .recipe-intro {
+    display: flex;
+  }
+  .recipe-img {
+    width: 30%;
+    margin: 0;
+  }
+  .recipe-parameters {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    padding: 2rem 0;
+
+  }
+  .right {
+    width: 70%;
+    margin-left: 2rem;
+  }
+  .recipe-content {
+    display: flex;
+  }
+  .recipe-ingredients {
+    width: 30%;
+  }
+  .recipe-prep {
+    width: 70%;
+    margin-left: 2rem;
+  }
+}
