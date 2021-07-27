@@ -4,34 +4,51 @@ import { useState } from "react"
 import AddInstructionsForm from "./AddInstructionsForm"
 import AddIngredientsForm from "./AddIngredientsForm"
 
-const AddRecipeForm = ({ data, setData }) => {
-  const initial = {
-    // id: uuidv4(),
-    title: "",
-    description: "",
-    // img: "https://images.unsplash.com/photo-1611599537845-1c7aca0091c0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80",
-    // prepTime: "",
-    // difficulty: "",
-    servingSize: 0,
-    ingredients: [{ name: "" }],
-    instructions: [{ name: "" }],
-  }
+const AddRecipeForm = ({ data }) => {
+  let initial =
+    data === undefined
+      ? {
+          // id: uuidv4(),
+          title: "",
+          description: "",
+          // img: "https://images.unsplash.com/photo-1611599537845-1c7aca0091c0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80",
+          // prepTime: "",
+          // difficulty: "",
+          serving_size: 0,
+          ingredients: [{ name: "" }],
+          instructions: [{ name: "" }],
+        }
+      : data
+
   const [recipe, setRecipe] = useState(initial)
 
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    // setData([...data, recipe])
-    // fetch("http://127.0.0.1:8000/api/create", {
-    //   method: "POST",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(recipe),
-    // })
-    // setRecipe(initial)
-    console.log(recipe)
+    if (data === undefined) {
+      fetch("http://127.0.0.1:8000/api/recipes/", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(recipe),
+      })
+      setRecipe(initial)
+      console.log(recipe)
+    } else {
+      fetch(`http://127.0.0.1:8000/api/recipes/${data.id}`, {
+        method: "PUT",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(recipe),
+      })
+      setRecipe(initial)
+      console.log(recipe)
+    }
+
     // let recipeValues = { ...recipe }
     // recipeValues.name = recipeName
     // recipeValues.description = description
@@ -39,6 +56,7 @@ const AddRecipeForm = ({ data, setData }) => {
     // setRecipe(recipes)
   }
 
+  console.log(recipe.serving_size)
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit}>
@@ -79,15 +97,19 @@ const AddRecipeForm = ({ data, setData }) => {
         <input
           type="text"
           placeholder="Serving size"
-          value={recipe.servingSize}
+          value={recipe.serving_size}
           onChange={(event) =>
-            setRecipe({ ...recipe, servingSize: event.target.value })
+            setRecipe({ ...recipe, serving_size: event.target.value })
           }
         />
         <AddIngredientsForm recipe={recipe} setRecipe={setRecipe} />
         <AddInstructionsForm recipe={recipe} setRecipe={setRecipe} />
         {/* <input type="file" /> */}
-        <input className="create-btn" type="submit" value="Create Recipe" />
+        <input
+          className="create-btn"
+          type="submit"
+          value={data === undefined ? "Create Recipe" : "Update Recipe"}
+        />
       </form>
     </div>
   )
