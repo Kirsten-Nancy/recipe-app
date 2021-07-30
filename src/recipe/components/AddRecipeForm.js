@@ -1,10 +1,11 @@
 import React from "react"
 import { useState } from "react"
 // import { v4 as uuidv4 } from "uuid"
+import { withRouter } from "react-router-dom"
 import AddInstructionsForm from "./AddInstructionsForm"
 import AddIngredientsForm from "./AddIngredientsForm"
 
-const AddRecipeForm = ({ data }) => {
+const AddRecipeForm = ({ data, history }) => {
   let initial =
     data === undefined
       ? {
@@ -36,6 +37,8 @@ const AddRecipeForm = ({ data }) => {
       })
       setRecipe(initial)
       console.log(recipe)
+      // Redirect to home page after adding recipe
+      history.push("/")
     } else {
       fetch(`http://127.0.0.1:8000/api/recipes/${data.id}`, {
         method: "PUT",
@@ -47,6 +50,7 @@ const AddRecipeForm = ({ data }) => {
       })
       setRecipe(initial)
       console.log(recipe)
+      history.push("/")
     }
 
     // let recipeValues = { ...recipe }
@@ -105,16 +109,17 @@ const AddRecipeForm = ({ data }) => {
         <AddIngredientsForm recipe={recipe} setRecipe={setRecipe} />
         <AddInstructionsForm recipe={recipe} setRecipe={setRecipe} />
         {/* <input type="file" /> */}
+
         <input
           className="create-btn"
           type="submit"
-          value={data === undefined ? "Create Recipe" : "Update Recipe"}
+          value={data === undefined ? "Create Recipe" : "Edit Recipe"}
         />
       </form>
     </div>
   )
 }
-export default AddRecipeForm
+export default withRouter(AddRecipeForm)
 
 //   // const getIngredients = (ingredientsFromChild) => {
 //   let recipeValues = { ...recipe }
