@@ -1,20 +1,18 @@
 from django.shortcuts import render
 from rest_framework import serializers, status
-from rest_framework.decorators import api_view
+from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Recipe
 from .serializers import RecipeSerializer
 
-
-@api_view(['GET', 'POST'])
-def recipe_list(request):
-    if request.method == 'GET':
+# Using class based views
+class RecipeList(APIView):
+    def get(self, request):
         recipes = Recipe.objects.all()
         serializer = RecipeSerializer(recipes, many=True)
         return Response(serializer.data)
 
-    elif request.method == 'POST':
-        print('request data', request.data)
+    def post(self, request):
         serializer = RecipeSerializer(data=request.data)
 
         if serializer.is_valid():
@@ -25,22 +23,23 @@ def recipe_list(request):
 
 
 # The arg name passed should be similar to that in the urls file
-@api_view(['GET','PUT','DELETE'])
-def recipe_detail(request, recipe_id):
+class RecipeDetail(APIView):
+    def get_recipe_obj(self,pk):
+        try:
+            return Recipe.objects.get(pk=pk)
+        except Recipe.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
-    try:
-        recipe = Recipe.objects.get(pk=recipe_id)
-    except Recipe.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-
-    if request.method == 'GET':
+    def get(self, request, pk):
         # The serializer by default expects only one object,
         # No need to pass the many parameter
+        recipe = self.get_recipe_obj(pk)
         serializer = RecipeSerializer(recipe)
         return Response(serializer.data)
 
-    elif request.method == 'PUT':
+    def put(self, request, pk):
         # When you are updating a particular entry, you pass the instance of that object and the data to update
+        recipe = self.get_recipe_obj(pk)
         serializer = RecipeSerializer(instance=recipe, data=request.data)
 
         if serializer.is_valid():
@@ -49,7 +48,8 @@ def recipe_detail(request, recipe_id):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    elif request.method == 'DELETE':
+    def delete(self, request, pk):
+        recipe = self.get_recipe_obj(pk)
         recipe.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     
