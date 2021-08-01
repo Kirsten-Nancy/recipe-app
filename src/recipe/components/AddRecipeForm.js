@@ -4,6 +4,7 @@ import { useState } from "react"
 import { withRouter } from "react-router-dom"
 import AddInstructionsForm from "./AddInstructionsForm"
 import AddIngredientsForm from "./AddIngredientsForm"
+import toast from "react-hot-toast"
 
 const AddRecipeForm = ({ data, history }) => {
   let initial =
@@ -38,7 +39,10 @@ const AddRecipeForm = ({ data, history }) => {
       setRecipe(initial)
       console.log(recipe)
       // Redirect to home page after adding recipe
+
       history.push("/")
+
+      toast.success("Recipe successfully added.")
     } else {
       fetch(`http://127.0.0.1:8000/api/recipes/${data.id}`, {
         method: "PUT",
@@ -51,6 +55,8 @@ const AddRecipeForm = ({ data, history }) => {
       setRecipe(initial)
       console.log(recipe)
       history.push("/")
+
+      toast.success("Recipe successfully edited.")
     }
 
     // let recipeValues = { ...recipe }
