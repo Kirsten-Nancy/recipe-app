@@ -33,8 +33,6 @@ class RecipeSerializer(serializers.ModelSerializer):
         # read_only_fields = ('recipe',)
 
     def create(self, validated_data):
-        # print('create fn')
-        # print('from serializer', validated_data)
         instructions = validated_data.pop('instructions')
         ingredients = validated_data.pop('ingredients')
 
