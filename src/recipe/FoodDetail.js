@@ -4,9 +4,7 @@ import { BsPeople } from "react-icons/bs"
 import { BiTime } from "react-icons/bi"
 import { GiLever } from "react-icons/gi"
 import { Link } from "react-router-dom"
-// import { FaEdit, FaTrash } from "react-icons/fa"
-// import { BsFillDropletFill } from "react-icons/bs"
-// import { IconContext } from "react-icons"
+import Swal from "sweetalert2"
 
 // Fetch directly from api because if you refresh it's not passed the data, because
 // It got the data from url parameters
@@ -31,12 +29,25 @@ const FoodDetail = ({ match, history }) => {
   }, [])
 
   const handleDelete = () => {
-    fetch(`http://127.0.0.1:8000/api/recipes/${recipe.id}`, {
-      method: "DELETE",
-    }).then(() => {
-      console.log("delete successful")
-      // Redirect to homepage after delete
-      history.push("/")
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://127.0.0.1:8000/api/recipes/${recipe.id}`, {
+          method: "DELETE",
+        }).then(() => {
+          console.log("delete successful")
+          // Redirect to homepage after delete
+          history.push("/")
+        })
+        Swal.fire("Deleted!", "Your recipe has been deleted.", "success")
+      }
     })
   }
 
