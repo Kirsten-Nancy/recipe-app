@@ -10,16 +10,14 @@ const AddInstructionsForm = ({ recipe, setRecipe }) => {
     // having made necessary changes in this case modifying the instruction at that particular index, thats currently being changed,
     // the others dont change
     let instructionList = recipe.instructions.map((instruction, idx) => {
-      return idx === index
-        ? { ...instruction, name: event.target.value }
-        : instruction
+      return idx === index ? event.target.value : instruction
     })
     setRecipe({ ...recipe, instructions: instructionList })
   }
 
   const handleAdd = () => {
     // Adding a new element to the array without mutating the original
-    let instructionList = [...recipe.instructions, {}]
+    let instructionList = [...recipe.instructions, ""]
     setRecipe({ ...recipe, instructions: instructionList })
     // let instructionList = [...instructions]
     // instructionList.push("")

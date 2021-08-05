@@ -9,16 +9,14 @@ const AddIngredientsForm = ({ recipe, setRecipe }) => {
     // })
     // console.log(recipe.ingredients)
     const ingredientList = recipe.ingredients.map((ingredient, idx) => {
-      return idx === index
-        ? { ...ingredient, name: event.target.value }
-        : ingredient
+      return idx === index ? event.target.value : ingredient
     })
-    console.log(ingredientList)
+
     setRecipe({ ...recipe, ingredients: ingredientList })
   }
 
   const handleAdd = () => {
-    const ingredientList = [...recipe.ingredients, {}]
+    const ingredientList = [...recipe.ingredients, ""]
     setRecipe({ ...recipe, ingredients: ingredientList })
   }
 
