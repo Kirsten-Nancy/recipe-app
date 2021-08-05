@@ -13,16 +13,17 @@
 }
 body {
   background-color: #F1F8F6;
+  padding: 0 6%;
 }
 
 /* NAV SECTION */
 nav {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   min-height: 10vh;
-  border-bottom: 1px solid var(--primary-color);
-
+  /* border-bottom: 1px solid var(--primary-color); */
+  
 }
 
 .nav-links {
@@ -30,6 +31,7 @@ nav {
   display: flex;
   justify-content: space-evenly;
   list-style: none;
+  font-weight: 500;
   /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-family: Arial, Helvetica, sans-serif; */
 }
@@ -48,6 +50,22 @@ p {
   line-height: 2rem;
 }
 
+/* Header Section */
+header {
+  padding: 2rem 0;
+}
+header p {
+  margin: 1.5rem 0;
+}
+.header-img {
+  width: 100%;
+  object-fit: cover;
+  margin-top: 1rem;
+}
+.start-btn {
+  background-color: #29BB89;
+  margin-right: 1rem;
+}
 /* REGISTER-FORM  SECTION */
 .register-form {
   width: 40%;
@@ -62,6 +80,7 @@ input[type=email], input[type=password] {
 .auth-btn {
   margin-top: 1rem;
   padding: 0.8rem;
+  
 }
 
 /* RECIPE-FORM SECTION */
@@ -122,12 +141,28 @@ select {
   padding: 0.8rem;
  
 }
-
+button {
+  padding: 0.8rem 1rem;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+}
+.login-btn {
+  background-color: royalblue;
+}
+.edit-btn {
+  margin-right: 2rem;
+  background-color: #29BB89;
+  font-size: 1rem;
+}
+.delete-btn {
+  background-color: red;
+  font-size: 1rem;
+}
 /* MAIN BODY */
 .main-container {
-  padding: 1% 6%;
   display: grid;
-  gap: 1.5rem;
+  gap: 3rem;
 
 }
 
@@ -140,7 +175,7 @@ select {
 /* RECIPE SECTION */
 .card {
   border-radius: 12px;
-  padding: 1rem 2rem;
+  padding: 1rem 0;
   /* background-color: #004643; */
 }
 .card h5{
@@ -148,96 +183,93 @@ select {
   color: #004643;
   text-transform: capitalize;
 }
-
-/* RECIPE DETAIL */
-.food-detail-container {
-  padding: 1% 8%;
+.card img{
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  overflow: hidden;
 }
+/* RECIPE DETAIL */
+
 .food-detail-container li {
   margin-top: 1rem;
   text-transform: capitalize;
 }
-h1 {
-  text-align: center;
-}
+
 .recipe-parameters {
   display: flex;
+  padding: 2.5rem 0;
   width: 100%;
   justify-content: space-between;
-  padding: 2rem 0;
-
 }
 
 .recipe-intro {
   margin-top: 1rem;
 }
-
-.recipe-img {
-  width: 100%;
-  margin: 2rem 0;
-}
  .recipe-img img {
   width: 100%;                   
   object-fit: cover;
-  height: 300px;
   border-radius: 12px;
+  margin-top: 1rem;
+  height: 300px;
 }
 
 .food-detail-container span {
   display: block;
   margin-top: 1rem;
 }
-.recipe-content {
-  width: 100%;
-}
-.recipe-ingredients {
-  width: 100%;
-}
+
 .recipe-ingredients ul ,ol{
   padding-left: 1rem;
 }
-.recipe-prep {
-  width: 100%;
-}
+
 .recipe-ingredients,
 .recipe-prep {
   padding: 1rem 0;
 }
+.step {
+  color: #29BB89;
+}
+.instruction-div {
+  padding: 0.5rem 0;
+}
 
 
-
-@media (min-width: 992px) { 
+@media (min-width: 992px) {
+  body{
+    padding: 0 10%;
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+  }
+  .header-content {
+    margin-top: 1rem;
+  }
+  .header-img {
+    margin-left: 3rem;
+    /* width: 60%; */
+    border-radius: 8px;
+    height: 400px;
+  }
   .main-container {
     grid-template-columns: repeat(3, 1fr);
-    padding: 1% 15%;
   }
   
   .form-container {
-    width: 40%; 
-  }
-  .food-detail-container {
-    padding: 1% 15%;
+    width: 70%; 
   }
   .recipe-intro {
     display: flex;
+    /* justify-content: space-between; */
   }
-  .recipe-img {
+  .left {
     width: 30%;
-    margin: 0;
-  }
-  .recipe-parameters {
-    display: flex;
-    width: 100%;
-    justify-content: space-around;
-    padding: 2rem 0;
-
-  }
-  .right {
-    width: 70%;
-    margin-left: 2rem;
+    margin-right: 6rem;
   }
   .recipe-content {
-    display: flex;
+    display: flex ;
+    margin-top: 2rem;
   }
   .recipe-ingredients {
     width: 30%;
@@ -246,4 +278,5 @@ h1 {
     width: 70%;
     margin-left: 2rem;
   }
-}
+  
+} 
