@@ -15,12 +15,12 @@ class IngredientSerializer(serializers.ModelSerializer):
 class InstructionSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(required=False)
 
-    # What is the meta class
     class Meta:
         model = Instruction
         fields = ('id', 'name', 'recipe')
         read_only_fields = ('recipe',)
 
+    
 
 class RecipeSerializer(serializers.ModelSerializer):
     ingredients = IngredientSerializer(many=True)
@@ -28,9 +28,8 @@ class RecipeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Recipe
-        fields = ('id', 'title', 'description', 'serving_size',
-                  'ingredients', 'instructions')
-        # read_only_fields = ('recipe',)
+        fields = ('id', 'title', 'description', 'serving_size','image','ingredients', 'instructions')
+        
 
     def create(self, validated_data):
         instructions = validated_data.pop('instructions')
@@ -54,6 +53,7 @@ class RecipeSerializer(serializers.ModelSerializer):
         instance.title = validated_data.get('title', instance.title)
         instance.description = validated_data.get('description', instance.title)
         instance.serving_size = validated_data.get('serving_size', instance.serving_size)
+        instance.image = validated_data.get('image', instance.image)
         instance.save()
 
         # Update ingredients
@@ -74,7 +74,7 @@ class RecipeSerializer(serializers.ModelSerializer):
             # Implies this is a new ingredient
             else:
                 ingredient_item = Ingredient.objects.create(**ingredient, recipe=instance)
-                remaining_ingredients.append(ingredient_item.id)
+                # remaining_ingredients.append(ingredient_item.id)  
 
         if len(initial_ingredients) > 0:
             for ingredient in initial_ingredients.values():
@@ -93,7 +93,7 @@ class RecipeSerializer(serializers.ModelSerializer):
                     continue
             else:
                 Instruction.objects.create(**instruction, recipe=instance)
-                remaining_instructions.append(instruction_item.id)
+                # remaining_instructions.append(instruction_item.id)
 
         if len(initial_instructions) > 0:
             for instruction in initial_instructions.values():
