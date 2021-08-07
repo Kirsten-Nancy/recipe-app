@@ -16,11 +16,12 @@ const Nav = () => {
         </li>
         <li>My Recipes</li>
         <li>Profile</li>
-        <li>
-          <Link to="/register">Register</Link>
-        </li>
       </ul>
-      <button>Login</button>
+      <Link to="/register">
+        <button className="login-btn">Login</button>
+      </Link>
+
+      <button className="login-btn">Logout</button>
     </nav>
   )
 }
