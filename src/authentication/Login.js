@@ -3,9 +3,8 @@ import { useState } from "react"
 import { useHistory } from "react-router-dom"
 import axiosInstance from "../api"
 
-const Register = () => {
+const Login = () => {
   const [email, setEmail] = useState("")
-  const [firstName, setFirstName] = useState("")
   const [password, setPassword] = useState("")
 
   let history = useHistory()
@@ -14,14 +13,19 @@ const Register = () => {
     event.preventDefault()
 
     axiosInstance
-      .post("user/register/", {
+      .post("token/", {
         email: email,
-        first_name: firstName,
         password: password,
       })
       .then((response) => {
-        // Prompt the user to login again to obtain the access and refresh token
-        history.push("/login")
+        localStorage.setItem("access_token", response.data.access)
+        localStorage.setItem("refresh_token", response.data.refresh)
+        // Updates the axios instance headers section and
+        // the access token will now be added to every request to the backend
+        axiosInstance.defaults.headers["Authorization"] =
+          "JWT " + localStorage.getItem("access_token")
+
+        history.push("/")
         console.log(response)
         console.log(response.data)
       })
@@ -29,7 +33,7 @@ const Register = () => {
 
   return (
     <div>
-      <h2 style={{ textAlign: "center" }}>Register</h2>
+      <h2 style={{ textAlign: "center" }}>Login</h2>
       <form className="register-form" onSubmit={handleSubmit}>
         <input
           type="email"
@@ -38,21 +42,15 @@ const Register = () => {
           onChange={(event) => setEmail(event.target.value.trim())}
         />
         <input
-          type="text"
-          placeholder="Enter your first name"
-          value={firstName}
-          onChange={(event) => setFirstName(event.target.value.trim())}
-        />
-        <input
           type="password"
           placeholder="Enter your password"
           value={password}
           onChange={(event) => setPassword(event.target.value.trim())}
         />
-        <input type="submit" value="Sign Up" className="auth-btn" />
+        <input type="submit" value="Sign In" className="auth-btn" />
       </form>
     </div>
   )
 }
 
-export default Register
+export default Login
