@@ -7,6 +7,8 @@ import Register from "./authentication/Register"
 import RecipeUpdate from "./recipe/RecipeUpdate"
 import Home from "./Home"
 import Login from "./authentication/Login"
+import Logout from "./authentication/Logout"
+import MyRecipes from "./recipe/MyRecipes"
 
 const App = () => {
   return (
@@ -18,8 +20,10 @@ const App = () => {
           <Route path="/create" component={AddRecipeForm} />
           <Route path="/update/:id" component={RecipeUpdate} />
           <Route path="/recipes/:id" component={FoodDetail} />
+          <Route path="/my-recipes/" component={MyRecipes} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
+          <Route path="/logout" component={Logout} />
         </Switch>
       </div>
     </Router>
