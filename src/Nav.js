@@ -8,20 +8,25 @@ const Nav = () => {
         Food<span className="logo">Space</span>
       </h1>
       <ul className="nav-links">
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/create">Create Recipe</Link>
-        </li>
-        <li>My Recipes</li>
+        <Link to="/">Home</Link>
+
+        <Link to="/create">Create Recipe</Link>
+
+        <Link to="/my-recipes/">My Recipes</Link>
         <li>Profile</li>
       </ul>
+
       <Link to="/register">
+        <button className="login-btn">Register</button>
+      </Link>
+
+      <Link to="/login">
         <button className="login-btn">Login</button>
       </Link>
 
-      <button className="login-btn">Logout</button>
+      <Link to="/logout">
+        <button className="login-btn">Logout</button>
+      </Link>
     </nav>
   )
 }
