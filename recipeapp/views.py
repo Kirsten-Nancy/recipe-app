@@ -3,16 +3,24 @@ from rest_framework import serializers, status
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated
 from .models import Recipe
 from .serializers import RecipeSerializer
 
 
 # Simplified views using drf generic views and mixins
 class RecipeList(generics.ListCreateAPIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticated]
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
+
+class UserRecipeList(generics.ListAPIView):
+    serializer_class = RecipeSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return Recipe.objects.filter(author=user)
+
 
 class RecipeDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Recipe.objects.all()
