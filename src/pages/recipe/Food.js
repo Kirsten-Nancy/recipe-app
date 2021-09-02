@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Food = ({ recipe }) => {
-  // console.log("from food card", recipe)
   return (
     <div className='card'>
       <Link
@@ -11,8 +10,10 @@ const Food = ({ recipe }) => {
         }}
       >
         <img src={recipe.image} alt='recipe' />
-        <h5>{recipe?.title}</h5>
-        <p>{recipe?.description}</p>
+        <div className='card-content'>
+          <h5>{recipe?.title}</h5>
+          <p>{recipe?.description}</p>
+        </div>
       </Link>
     </div>
   )

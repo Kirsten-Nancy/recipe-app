@@ -2,7 +2,6 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import axiosInstance from '../../api'
-import { isAuthenticated } from '../../utils/authUtil'
 
 const Logout = () => {
   let history = useHistory()
@@ -15,8 +14,8 @@ const Logout = () => {
     localStorage.removeItem('refresh_token')
     axiosInstance.defaults.headers['Authorization'] = null
     history.push('/login')
-    isAuthenticated()
-  })
+    window.location.reload()
+  }, [])
 
   return <div>Logout</div>
 }

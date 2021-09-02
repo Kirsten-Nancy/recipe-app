@@ -1,13 +1,22 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+import { AuthContext } from '../../AuthContext'
 import axiosInstance from '../../api'
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isAuthenticated, setIsAuthenticated] = useContext(AuthContext)
 
   let history = useHistory()
+
+  useEffect(() => {
+    // Check if is authenticated, redirect to home
+    if (isAuthenticated) {
+      history.push('/home')
+    }
+  }, [])
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -27,6 +36,7 @@ const Login = () => {
 
         console.log(response)
         console.log(response.data)
+        setIsAuthenticated(true)
         history.push('/home')
       })
       .catch((error) => {
@@ -36,24 +46,26 @@ const Login = () => {
   }
 
   return (
-    <div>
-      <h2 style={{ textAlign: 'center' }}>Login</h2>
-      <form className='register-form' onSubmit={handleSubmit}>
-        <input
-          type='email'
-          placeholder='Enter your email'
-          value={email}
-          onChange={(event) => setEmail(event.target.value.trim())}
-        />
-        <input
-          type='password'
-          placeholder='Enter your password'
-          value={password}
-          onChange={(event) => setPassword(event.target.value.trim())}
-        />
-        <input type='submit' value='Sign In' className='auth-btn' />
-      </form>
-    </div>
+    <section className='auth-section'>
+      <div className='auth-card'>
+        <h2 className='auth-title'>Login</h2>
+        <form className='register-form' onSubmit={handleSubmit}>
+          <input
+            type='email'
+            placeholder='Enter your email'
+            value={email}
+            onChange={(event) => setEmail(event.target.value.trim())}
+          />
+          <input
+            type='password'
+            placeholder='Enter your password'
+            value={password}
+            onChange={(event) => setPassword(event.target.value.trim())}
+          />
+          <input type='submit' value='Sign In' className='auth-btn' />
+        </form>
+      </div>
+    </section>
   )
 }
 

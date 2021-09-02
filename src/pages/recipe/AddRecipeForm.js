@@ -13,8 +13,6 @@ const AddRecipeForm = ({ data, history }) => {
           title: '',
           description: '',
           img: '',
-          // prepTime: "",
-          // difficulty: "",
           image: '',
           serving_size: 0,
           ingredients: [''],
@@ -30,8 +28,6 @@ const AddRecipeForm = ({ data, history }) => {
 
     // Get the current user to add as a foreign key in db
     axiosInstance.get('user/current/').then((response) => {
-      // console.log(response.data)
-
       if (data === undefined) {
         const formData = new FormData()
         formData.append('author', response.data.id)
@@ -95,24 +91,6 @@ const AddRecipeForm = ({ data, history }) => {
             setRecipe({ ...recipe, description: event.target.value })
           }
         />
-        {/* <input
-          type="text"
-          placeholder="Cook time"
-          value={recipe.prepTime}
-          onChange={(event) =>
-            setRecipe({ ...recipe, prepTime: event.target.value })
-          }
-        />
-        <select
-          value={recipe.difficulty}
-          onChange={(event) =>
-            setRecipe({ ...recipe, difficulty: event.target.value })
-          }
-        > */}
-        {/* <option value="Easy">Easy</option>
-          <option value="Medium">Medium</option>
-          <option value="Hard">Hard</option>
-        </select> */}
         <input
           type='text'
           placeholder='Serving size'
@@ -121,7 +99,13 @@ const AddRecipeForm = ({ data, history }) => {
             setRecipe({ ...recipe, serving_size: event.target.value })
           }
         />
+        <label htmlFor='Ingredients' className='recipeLabel'>
+          Ingredients Section
+        </label>
         <AddIngredientsForm recipe={recipe} setRecipe={setRecipe} />
+        <label htmlFor='Instructions' className='recipeLabel'>
+          Instructions Section
+        </label>
         <AddInstructionsForm recipe={recipe} setRecipe={setRecipe} />
         <label htmlFor='file'>Choose a recipe cover:</label>
         <input
@@ -130,7 +114,7 @@ const AddRecipeForm = ({ data, history }) => {
           accept='.jpg, .jpeg, .png'
           onChange={handleUpload}
         />
-        <img src={preview} alt='img' />
+        <img src={preview} alt='img' className='preview-img' />
         <input
           className='create-btn'
           type='submit'

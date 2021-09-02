@@ -10,26 +10,28 @@ import Login from './pages/authentication/Login'
 import Logout from './pages/authentication/Logout'
 import MyRecipes from './pages/recipe/MyRecipes'
 import PrivateRoute from './components/PrivateRoute'
-import { isAuthenticated } from './utils/authUtil'
+import { AuthProvider } from './AuthContext'
 
 const App = () => {
   return (
-    <Router>
-      <div className='app'>
-        {isAuthenticated() && <Nav />}
-        <Switch>
-          <Route path='/' component={Login} exact />
-          <Route path='/register' component={Register} />
-          <Route path='/login' component={Login} />
-          <Route path='/logout' component={Logout} />
-          <PrivateRoute path='/home' exact component={Home} />
-          <PrivateRoute path='/create' component={AddRecipeForm} />
-          <PrivateRoute path='/my-recipes/' component={MyRecipes} />
-          <PrivateRoute path='/recipes/:id' component={FoodDetail} />
-          <PrivateRoute path='/update/:id' component={RecipeUpdate} />
-        </Switch>
-      </div>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <div className='app'>
+          <Nav />
+          <Switch>
+            <Route path='/' component={Login} exact />
+            <Route path='/register' component={Register} />
+            <Route path='/login' component={Login} />
+            <Route path='/logout' component={Logout} />
+            <PrivateRoute path='/home' exact component={Home} />
+            <PrivateRoute path='/create' component={AddRecipeForm} />
+            <PrivateRoute path='/my-recipes/' component={MyRecipes} />
+            <PrivateRoute path='/recipes/:id' component={FoodDetail} />
+            <PrivateRoute path='/update/:id' component={RecipeUpdate} />
+          </Switch>
+        </div>
+      </Router>
+    </AuthProvider>
   )
 }
 
