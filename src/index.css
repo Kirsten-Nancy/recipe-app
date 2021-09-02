@@ -68,10 +68,14 @@ header p {
 }
 /* REGISTER-FORM  SECTION */
 .register-form {
-  width: 40%;
   margin: 1rem auto;
   padding: 1rem;
-  /* background-color: #EF4F4F; */
+
+}
+.register-form input{
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid lightgray;
 }
 input[type=email], input[type=password] {
   margin-top: 1rem;
@@ -80,7 +84,11 @@ input[type=email], input[type=password] {
 .auth-btn {
   margin-top: 1rem;
   padding: 0.8rem;
-  
+}
+.login-btn {
+  /* border: 2px solid royalblue; */
+  background-color: var(--primary-color);
+  color: #f1f5f8;
 }
 
 /* RECIPE-FORM SECTION */
@@ -145,17 +153,16 @@ button {
   padding: 0.8rem 1rem;
   border: none;
   border-radius: 4px;
-  color: #fff;
 }
-.login-btn {
-  background-color: royalblue;
-}
+
 .edit-btn {
+  color: #fff;
   margin-right: 2rem;
   background-color: #29BB89;
   font-size: 1rem;
 }
 .delete-btn {
+  color: #fff;
   background-color: red;
   font-size: 1rem;
 }
@@ -248,7 +255,6 @@ button {
   }
   .header-img {
     margin-left: 3rem;
-    /* width: 60%; */
     border-radius: 8px;
     height: 400px;
   }
@@ -261,7 +267,7 @@ button {
   }
   .recipe-intro {
     display: flex;
-    /* justify-content: space-between; */
+
   }
   .left {
     width: 30%;

@@ -1,6 +1,6 @@
-import React from "react"
-import { AiFillDelete } from "react-icons/ai"
-import { IconContext } from "react-icons"
+import React from 'react'
+import { AiFillDelete } from 'react-icons/ai'
+import { IconContext } from 'react-icons'
 
 const AddInstructionsForm = ({ recipe, setRecipe }) => {
   // const [instructions, setInstructions] = useState([""])
@@ -17,11 +17,8 @@ const AddInstructionsForm = ({ recipe, setRecipe }) => {
 
   const handleAdd = () => {
     // Adding a new element to the array without mutating the original
-    let instructionList = [...recipe.instructions, ""]
+    let instructionList = [...recipe.instructions, '']
     setRecipe({ ...recipe, instructions: instructionList })
-    // let instructionList = [...instructions]
-    // instructionList.push("")
-    // setInstructions(instructionList)
   }
 
   const handleDelete = (index) => {
@@ -31,41 +28,33 @@ const AddInstructionsForm = ({ recipe, setRecipe }) => {
       })
       setRecipe({ ...recipe, instructions: instructionList })
     } else {
-      alert("You need to have at least one instruction")
+      alert('You need to have at least one instruction')
     }
-
-    // let instructionList = [...instructions]
-    // if (instructionList.length > 1) {
-    //   instructionList.splice(index, 1)
-    //   setInstructions(instructionList)
-    // } else {
-    //   alert("Can't delete me")
-    // }
   }
 
   return (
     <div>
       {recipe.instructions.map((instruction, index) => {
         return (
-          <div key={index} className="instruction-field">
+          <div key={index} className='instruction-field'>
             <textarea
-              rows="3"
-              type="textarea"
-              placeholder="Enter instruction"
+              rows='3'
+              type='textarea'
+              placeholder='Enter instruction'
               value={instruction.name}
               onChange={(event) => handleChange(event, index)}
             />
-            <IconContext.Provider value={{ className: "delete-icon" }}>
+            <IconContext.Provider value={{ className: 'delete-icon' }}>
               <AiFillDelete onClick={() => handleDelete(index)} />
             </IconContext.Provider>
           </div>
         )
       })}
       <input
-        className="add-btn"
-        type="button"
+        className='add-btn'
+        type='button'
         onClick={handleAdd}
-        value="Add instruction"
+        value='Add instruction'
       />
     </div>
   )
